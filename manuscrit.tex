@@ -1,0 +1,148 @@
+\documentclass[a4paper,12pt,twoside,openright]{ThesisStyle}
+%\documentclass[a4paper,12pt,twoside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french,english]{babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amsthm,amssymb,enumitem,xspace,tikz,array}
+\usetikzlibrary{arrows,automata,shapes,positioning}
+\usepackage{graphicx,color}
+\usepackage[justification=centering,format=plain]{caption}
+\usepackage[section]{placeins}
+\usepackage{lscape}
+\usepackage{geometry,supertabular, mathdots}
+\usepackage[labelformat=simple]{subfig}
+%\usepackage{subcaption}
+%\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{rotfloat}
+\usepackage[vlined,boxruled,commentsnumbered,longend]{algorithm2e}
+\usepackage{forest}
+\usepackage{makeidx}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{sidecap}
+\usepackage[style=alphabetic,backend=biber,maxbibnames=99,doi=false,url=false,isbn=false,firstinits=true]{biblatex}
+%\usepackage[style=alphabetic,backend=biber]{biblatex}
+
+%\DeclareSourcemap{
+% \maps[datatype=bibtex]{
+%     \map[overwrite=true]{
+%     \step[fieldsource=author,
+%           match=Millet,
+%           final]
+%           \step[fieldset=keywords, fieldvalue={, own}, append]
+%   }
+% }
+%}
+\addbibresource{Thesis.bib}
+
+
+%\tikzset{fontscale/.style = {font = 11pt}} ça ne fait rien
+
+\makeindex
+\input{macros}
+
+\begin{document}
+
+\frontmatter
+\input{TitlePage}
+\thispagestyle{empty}
+
+
+
+%\dominitoc
+
+%\pagenumbering{roman}
+%\input{abstractFront}
+
+\input{aknowledgement}
+
+%\setcounter{tocdepth}{5}     % Dans la table des matieres
+{\tableofcontents}
+{\listoffigures}
+{\listoftables}
+% \input{resume}
+
+
+\mainmatter
+\input{chapter_introduction}
+
+\input{chapter_model}
+
+\input{chapter_verif}
+\input{proof}	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%    Conclusion    %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Conclusion} We demonstrated the feasibility of formal
+%verification through model-checking for mobile robot protocols in a
+%discrete space. We verified two protocols for ring exploration. In the
+%first case model checking helped in refining the correctness bounds of
+%the protocol and in the second case it produced a counter-example,
+%which permitted to correct the protocol. 
+%We then proved the correctness of this protocol by induction.
+%
+%Our approach leads not only to find and correct bugs in the
+%protocols (which is especially useful in the more challenging
+%execution model ASYNC), but also relieves protocol designers from the
+%burden of manually checking small instances of the problem, thus
+%permitting them to concentrate on abstract configurations where some
+%global invariants hold.
+
+
+\input{chapter_synth}	
+
+
+		
+%\chapter{A tool for parameterized model-checking}
+%	\section{Methodology}
+%	\section{A tool}
+%		\subsection{A language}
+%		\subsection{Model transformation}
+%		\subsection{Verification results: Chang \& Roberts algorithm}	
+%
+
+
+\input{conclusion}
+%Nous nous somme intéressé a des robots mobiles bien particulier~\cite{suzuki_distributed_1999}
+%L' approche utilisée s'est basée sur une modélisation des protocols par automates finis.
+%Cette modélisation générale .... a pu être utilisée sur deux des problèmes les plus ... dans les protocols de robots mobiles.
+%Et avec deux méthodes bien différentes... 
+
+%model checking
+%synthèse
+
+%Perspectives
+	%preuve automatique de protocol en utilisant les debuts de preuves donnés par les auteurs
+	%faire la synthèse
+	%Vérification d'algorithmes paramètre
+		%travail avec serge 
+	
+
+
+%\bibliographystyle{alpha}
+%\bibliography{Thesis}
+\cleardoublepage
+%\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\settowidth\labelnumberwidth{[99]} % hack à cause de la bib perso
+\printbibliography[title=Bibliography,notkeyword=own]
+%\printindex
+\appendix
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+\selectlanguage{french}
+%\addcontentsline{roc}{chapter}{Résumé de la thèse en français}
+\chapter{Résumé de la thèse en français}
+\input{resume_main}
+\selectlanguage{english}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+
+% back cover
+\pagestyle{empty}
+\cleardoublepage
+\pagestyle{empty}
+\clearpage
+%\input{abstractBack}
+\end{document}

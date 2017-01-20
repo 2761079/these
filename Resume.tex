@@ -1,0 +1,44 @@
+\documentclass[a4paper,12pt,twoside,openright]{article}
+%\documentclass[a4paper,12pt,twoside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amsthm,amssymb,enumitem,xspace,array}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,shapes,positioning}
+\usepackage{graphicx,color}
+\usepackage[justification=centering,format=plain]{caption}
+\usepackage[section]{placeins}
+\usepackage{lscape}
+\usepackage{geometry,supertabular, mathdots}
+\usepackage[labelformat=simple]{subfig}
+%\usepackage{subcaption}
+%\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{rotfloat}
+%\usepackage{forest} %%% j'ai commente ce package
+\usepackage{gensymb}
+%\usepackage{graphicx}
+\usepackage{sidecap}
+%\usepackage[style=alphabetic,backend=biber,maxbibnames=99,doi=false,url=false,isbn=false,firstinits=true]{biblatex}
+%\usepackage[style=alphabetic,backend=biber]{biblatex}
+
+
+
+%\tikzset{fontscale/.style = {font = 11pt}} ça ne fait rien
+
+\input{macros}
+
+\begin{document}
+
+{\itshape \Large \bfseries Synthèse du rapport de thèse en français}
+
+\vspace{1.25cm}
+	
+%In this work, our aim is to investigate how formal methods can be applied in the context of mobile robot algorithms.
+\input{resume_main}
+
+\bibliographystyle{alpha}
+\bibliography{Thesis}
+\end{document}

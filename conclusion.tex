@@ -1,0 +1,121 @@
+% !TEX root = manuscrit.tex
+
+\chapter{Conclusion and perspectives}
+In this thesis, we demonstrate the feasibility of applying formal methods to mobile robot protocols in a discrete space.
+We propose a formal model which represents the robots as automata communicating via shared variables. 
+This model is general enough to handle the various settings, from synchronous to asynchronous execution models, and to express all the particularities of mobile robot algorithms.
+We then provide some results for the distributed algorithms community, applying both model checking and synthesis techniques on this model.
+\section*{Summary}
+
+%model
+The techniques of model checking and synthesis are known to suffer from combinatorial explosion, due to the large size of the models of the system and the properties to be verified. 
+Previous formal works on robot protocols were only able to handle synchronous robots, in the Fsync model, where the set of executions is smaller than in the asynchronous one (Async). 
+Moreover, even in this synchronous model, they only solve very small instances, for instance 3 robots exploring $3\times 3$ grids for the model checking, or $5$ robots perpetually exploring a $10$ nodes ring for the synthesis.
+
+Using equivalence classes with respect to symmetries, we show that it is possible to reduce the size of the model, 
+allowing us to deal with  larger instances in the asynchronous execution model.
+
+%model checking
+Our results demonstrate the interest of model-checking tools, that use concise data and parallel algorithms, 
+permitting to verify protocols for which hand made proofs were painful 
+and sometimes erroneous. Indeed, we exhibited a counter example for an exploration protocol, leading to a better understanding of the system 
+and a corrected version of the algorithm. Our work also differs from previous approaches, since we verify some complex properties, assuming fairness, and not only invariant properties. 
+We validated our approach by two case studies in the asynchronous model: 
+\begin{itemize}
+\item The verification of Flocchini algorithm for exploration with stop.
+We show that for many instances of $k$ and $n$ not covered in the original paper, the algorithm is still correct.
+\item The verification of the Min algorithm for exclusive perpetual exploration. 
+The DiVinE tool produces a counter-example in the asynchronous setting, where two robots collide.
+ We correct the original protocol and verify the new one via model checking for several instances of the ring size. 
+ \end{itemize}
+ For this last problem, we also provide a correctness proof for any ring size with an inductive approach.
+
+
+
+%synth
+Going one step further, we investigate the automatic synthesis of robot protocols.
+Concerning synthesis in the Fsync model, 
+an encoding of the gathering problem as a reachability game allows us to automatically generate an optimal distributed algorithm  for three robots evolving on a fixed size ring. Our optimality criterion refers to the number of robot moves necessary to actually achieve gathering.
+	%diff
+The previous attempt to synthesize robot algorithms was not fully automatic: %: we only give the specification of the system and extract from the initial configurations those from which an impossibility result holds.
+The method was a construction of all possible algorithms, followed by manual verification performed on each of these algorithms.
+Moreover, this solution only handles rigid configurations and does not take into account symmetric configurations or those containing a tower. In contrast, our synthesis technique handles all configurations, and permits to highlight initial configurations from which the gathering is not solvable. Once these configurations are extracted from the set of initial configurations, our technique automatically generates an algorithm.
+Thus, this approach also permits to obtain impossibility results as side results. Indeed when there exists some periodic initial configurations, 
+the tool exhibits these configurations as not being part of the winning set.
+
+In the Async model, we show that synthesis can be seen as a two players game with partial information. In order to fight the combinatorial explosion due to the asynchronous model we propose a recursive algorithm producing a gathering protocol in the asynchronous model thanks to synchronous synthesis and model checking.
+This approach is the first one that deals with synthesis of an algorithm for mobile robots in the asynchronous model.
+
+
+These contributions lead to the following set of reviewed publications:
+\paragraph{International journals}
+\begin{refsection}
+   \nocite{*}
+   \printbibliography[title=Bibliographie,keyword=own,keyword=intj,resetnumbers,heading=none,sorting=ynt]
+\end{refsection}
+\paragraph{International conferences}
+\begin{refsection}
+   \nocite{*}
+   \printbibliography[title=Bibliographie,keyword=own,keyword=intc,resetnumbers,heading=none,sorting=ynt]
+\end{refsection}
+\paragraph{National conferences}
+\begin{refsection}
+   \nocite{*}
+   \printbibliography[title=Bibliographie,keyword=own,keyword=natc,resetnumbers,heading=none,sorting=ynt]
+\end{refsection}
+\paragraph{Submitted}
+\begin{refsection}
+   \nocite{*}
+   \printbibliography[title=Bibliographie,keyword=own,keyword=sub,resetnumbers,heading=none,sorting=ynt]
+\end{refsection}
+
+
+%\begin{refsection}
+%   \nocite{*}
+%   \printbibliography[title=Bibliographie,keyword=own,resetnumbers,heading=none,sorting=ynt]
+%\end{refsection}
+
+
+\section*{Ongoing works and perspectives}
+
+In the short term, we would like to apply synthesis to the gathering of 4 robots in the Async model, to obtain impossibility results and/or 
+protocols. While algorithms already exist for restricted sets of initial configurations, we are looking for a protocol that could handle the maximal 
+set of initial configurations.
+In this setting (still with $n$ and $4$ coprime), a particular class of initial configurations for which no result exists should be investigated, 
+namely the SP4 configurations: defining an interval as a  maximal sequence of free nodes, such configurations are 
+\emph{symmetric ones of type node-edge, such that the odd interval cut by the axis is bigger than the even one} (an SP4 configuration is depicted in Figure~\ref{fig:introEx}). 
+
+We also would like to extend the Pactole framework~\cite{CourtieuRTU15b} to certify the proofs given in Section~\ref{subsec:induction} and~\ref{preuve2}, for the Min algorithm and the gathering solution respectively. 
+This framework is a part of Coq  devoted to robot algorithms and already permitted to certify a gathering algorithm in the plane 
+for the Ssync execution model. According to the authors, adapting the tool to the discrete environment would not require too much modifications. 
+On the other hand, extension to the Async model would be more difficult.
+%Using this framework for a discrete environment would not "demander" too much change.  (chest eux qui le rise)
+For this point, we think that schemes like those depicted in Figure~\ref{fig:all} and~\ref{fig:lower}, describing the Min algorithm as a 
+parametrized graph, could be useful to translate algorithms in this tool.
+
+Moreover, several decidability questions remain open for the robot model. The first one is the decidability of parameterized verification for this model, with the ring size (and possibly the number of robots) as parameter. While there is a general undecidability result~\cite{apt.kozen.86}, 
+several positive answers have been obtained in restricted frameworks, from~\cite{EsparzaFM99} for some broadcast protocols, to more recent work on byzantine consensus~\cite{AminofKRSV14,KonnovVW15}. Hence, the question remains of interest.
+When there is only one robot and the parameter of the system is the size of the graph, Rubin~\cite{Rubin15} proves the decidability 
+of the parameterized verification problem. This result is obtained by a reduction from classic questions in automata theory and monadic second order logic. Unfortunately, in this restricted setting, only a few problems are interesting and all answers are negative, which conforms to the intuition.
+  %, i.e., universality and validity problems.
+We would like to see how his work could be extended to multiple robots.
+%decidability for the synthesis
+The second one is the decidability of synthesis of parameterized algorithm for this model, in view of the undecidability result for the general case~\cite{PnueliR90}.
+%complexite
+
+
+In the longer term, we plan to extend this work and look for semi-automatic verification of parametrized algorithms, for the cases where 
+no decidability results can be obtained.  
+%like
+%%well formed models~\cite{Sis_Ger_S92,conf_popl_EmersonN95,conf_lics_EsparzaFM99}
+%%réduction à de "petits modèles" ~\cite{conf_cade_EmersonK00,conf_concur_FuggerW12}
+%%couplant model checking et preuves~\cite{conf_podc_KurshanM89,conf_cav_JonssonS07}
+%~\cite{conf_cav_AronsPRXZ01}
+Since the first proposals in~\cite{MannaP-tacs94} or \cite{ClarkeGJ-concur95}, a classical line of work combined model-checking with other techniques like abstraction, induction, etc.  These methods are usually sound but incomplete and were largely used since, for instance in~\cite{BjornerBCCKMSU96,AlfaroM-tacas97,CansellMM-jucs01,AronsPRXZ-cav01}.
+A preliminary step not described in this manuscript consists in the development of a prototype, where model-checking and inductive proofs are combined. 
+%un langage
+%abstraction des parametre
+   
+
+
+

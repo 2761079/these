@@ -1,0 +1,130 @@
+% !TEX root = manuscrit.tex
+
+
+\newcommand{\comment}[1]{\marginpar{\small{#1}}}
+%\newcommand{\comment}[1]{\marginpar{\phantom{\small{#1}}}}
+
+\newcommand{\arena}{\ensuremath{\mathcal{A}}}
+\newcommand{\Win}{\ensuremath{\mathit{Win}}}
+\newcommand{\Reach}{\ensuremath{\mathit{Reach}}}
+\newcommand{\Outcome}{\ensuremath{\mathit{Outcome}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Part}{\ensuremath{\mathcal{P}}}
+\newcommand{\view}{\ensuremath{\mathit{view}}}
+\newcommand{\Views}{\ensuremath{\mathcal{V}}}
+\newcommand{\obs}{\ensuremath{\mathit{obs}}}
+\newcommand{\equivclass}[1]{[#1]_\Oequiv}
+\newcommand{\Aequivclass}[1]{[#1]_{\Oequiv_{\Past}}}
+\newcommand{\Act}{\ensuremath{\mathbb{M}}}
+\newcommand{\Rep}{\ensuremath{\mathit{Rep}}}
+\newcommand{\Config}{\ensuremath{\mathcal{C}}}
+\newcommand{\Agather}{\ensuremath{\arena_{\textrm{gather}}}}
+\newcommand{\rep}{\ensuremath{\mathit{rep}}}
+\newcommand{\Sum}[3]{\sum\limits_{#1}^{#2} #3}
+\newcommand{\Next}{\ensuremath{\mathit{Next}}}
+\newcommand{\eff}{\oplus}
+%front back ....
+\newcommand{\clockwise}{\ensuremath{\textit{Front}}}
+\newcommand{\Front}{\clockwise}
+\newcommand{\counterclockwise}{\ensuremath{\textit{Back}}}
+\newcommand{\Back}{\counterclockwise}
+\newcommand{\still}{\ensuremath{\textit{Idle}}}
+\newcommand{\Idle}{\still}
+\newcommand{\cclockwise}{\ensuremath{\textit{Clockwise}}}
+\newcommand{\cFront}{\cclockwise}
+\newcommand{\ccounterclockwise}{\ensuremath{\textit{Anti-clockwise}}}
+\newcommand{\cBack}{\ccounterclockwise}
+\newcommand{\wait}{\ensuremath{\bot}}
+\newcommand{\?}{\ensuremath{\textit{Doubt}}}
+\newcommand{\disoriented}{\?}
+\newcommand{\Doubt}{\?}
+\newcommand{\Actions}{\ensuremath{\Delta}}
+\newcommand{\Past}{\ensuremath{S}}
+\newcommand{\PastK}{\ensuremath{S^{k}}}
+\newcommand{\PosTower}{\ensuremath{\mathit{PosTower}}}
+\newcommand{\f}{\ensuremath{\mathfrak{f}}}
+\newcommand{\Look}{\ensuremath{\mathit{Look}}}
+\newcommand{\Move}{\ensuremath{\mathit{Move}}}
+\newcommand{\AConfig}{\Config_{\Past}}
+\newcommand{\m}{\ensuremath{\mathit{mem}}}
+\newcommand{\maxmult}{\ensuremath{\mathit{maximal\_multiplicity}}\xspace}
+\newcommand{\observe}{\ensuremath{\mathit{observe\_neighbors}}\xspace}
+\newcommand{\Dslash}{\texttt{\symbol{92}\symbol{92}}}
+\newcommand{\plusN}{\ensuremath{+_n}}
+\newcommand{\plusK}{\ensuremath{+_k}}
+\newcommand{\moinsN}{\ensuremath{-_n}}
+\newcommand{\moinsK}{\ensuremath{-_k}}
+\newcommand{\sym}{\ensuremath{\textit{sym}}}
+\newcommand{\suc}{\ensuremath{\textit{succ}}}
+\newcommand{\st}{\ensuremath{\textit{ such that }}}
+\newcommand{\ie}{\ensuremath{\textit{i.e.}}, }
+\newcommand{\mem}{\ensuremath{s}}
+\newcommand{\ObsClass}{\ensuremath{\Obs/\!\!\!\Oequiv}}
+%decision function
+\newcommand{\dec}{\ensuremath{\partial}}
+
+
+
+
+
+\newcommand{\Oequiv}{\ensuremath{\equiv}}
+\newcommand{\Cequiv}{\ensuremath{\approx}}
+
+
+\newcommand{\Rob}{\ensuremath{\textit{Rob}}}
+\newcommand{\Pos}{\ensuremath{\textit{Pos}}}
+\newcommand{\Obs}{\ensuremath{\textit{Obs}}}
+\newcommand{\Sched}{\ensuremath{\textit{Sched}}}
+\newcommand{\LC}{\ensuremath{\textit{LC}}}
+\newcommand{\RLC}{\ensuremath{\textit{RLC}}}
+%\newcommand{\O}{\ensuremath{\mathcal{O}}} \o \O already defined
+
+
+
+
+
+
+\newcommand{\G}{\Box}
+\newcommand{\F}{\Diamond}
+\newcommand{\U}{\mathsf{U}}
+\newcommand{\X}{\mathsf{X}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\true}{\textit{true}}
+\newcommand{\false}{\textit{false}}
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+
+\usepackage[]{algorithm2e}
+\usepackage{wrapfig}
+
+\usepackage{etoolbox}
+\newcommand*{\lastlevel}{section}
+\pretocmd{\section}{\def\lastlevel{section}}{}{}
+\pretocmd{\subsection}{\def\lastlevel{subsection}}{}{}
+\pretocmd{\subsubsection}{\def\lastlevel{subsubsection}}{}{}
+
+\makeatletter
+\newcommand{\l@todo}[2]{%
+  \begingroup
+    \let\@dotsep\@M
+    \csname l@#2\endcsname{#1}{}%
+  \endgroup
+}
+
+\newcommand{\todo}[1]{
+  \ifdefstring{\lastlevel}{section}{%
+    \addtocontents{toc}{\protect\vspace{-1.0em plus -1pt}}%
+  }{}%
+  \addtocontents{toc}{%
+    \protect\contentsline{todo}{\protect\numberline{}\normalfont\itshape
+  \textcolor{red}{TODO #1}}{\lastlevel}}%
+   \textcolor{red}{{TODO #1}}
+}
+\makeatother
